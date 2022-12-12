@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <style>
+      html,
+      body,
+      div {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+      }
+      iframe {
+        height: 100%;
+        width: 100vw;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Declare a div, that holds the space in parent page, to locate the instance of mobile product. -->
+    <div id="golden-race-desktop-app"></div>
+    <!--
+            Please keep in mind that "https://int-games.virtustec.com" is the test server, once in production you will use a different server.
+            After this, you will be able to instantiate the class *grMobileLoader*, configurate it and to create the mobile product communication
+        -->
+
+        <script
+        src="https://int.virtustec.com/desktop-v4/default/golden-race-desktop-loader.js"
+        id="golden-race-desktop-loader"
+      ></script>
+      
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          var loader = grDesktopLoader({
+            onlineHash: "YOUR_PLAYER_ONLINE_HASH",
+          });
+        });
+      </script>
+  </body>
+</html>

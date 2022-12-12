@@ -1,11 +1,12 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Home() {
+export default function SignUp() {
   const router = useRouter();
 
   const [state, setState] = useState({
     username: "",
+    email: "",
     password: "",
   });
 
@@ -18,7 +19,7 @@ export default function Home() {
   async function handleSubmit() {
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signin`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/auth/signup`,
         {
           method: "POST",
           body: JSON.stringify(state),
@@ -28,22 +29,16 @@ export default function Home() {
         }
       );
       if (res.ok) {
-        const json = await res.json();
-        localStorage.setItem("token", json.token);
-        router.push({
-          pathname: "/casino",
-          //query: { username },
-        });
-      } else {
-        alert("Bad credentials");
+        alert("User register success");
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
     }
   }
 
-  function goToSignUp() {
-    router.push("/signup");
+  function goToLogIn() {
+    router.push("/");
   }
 
   return (
@@ -57,7 +52,7 @@ export default function Home() {
                   <div className="md:p-12 md:mx-6">
                     <div className="text-center">
                       <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">
-                        Login
+                        Sign Up
                       </h4>
                     </div>
                     <form>
@@ -68,6 +63,16 @@ export default function Home() {
                           name="username"
                           placeholder="username"
                           value={state.username}
+                          onChange={handleChange}
+                        />
+                      </div>
+                      <div className="mb-4">
+                        <input
+                          className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-400 focus:outline-none"
+                          type="email"
+                          name="email"
+                          placeholder="email"
+                          value={state.email}
                           onChange={handleChange}
                         />
                       </div>
@@ -87,17 +92,17 @@ export default function Home() {
                           type="button"
                           onClick={handleSubmit}
                         >
-                          Login
+                          Sign Up
                         </button>
                       </div>
                       <div className="flex items-center justify-between pb-6">
-                        <p className="mb-0 mr-2">Don't have an account?</p>
+                        <p className="mb-0 mr-2">Don't have an account yet?</p>
                         <button
                           type="button"
                           className="inline-block px-6 py-2 border-2 border-blue-400 text-blue-400 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                          onClick={goToSignUp}
+                          onClick={goToLogIn}
                         >
-                          Sign Up
+                          Login
                         </button>
                       </div>
                     </form>
