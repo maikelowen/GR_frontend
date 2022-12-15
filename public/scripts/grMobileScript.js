@@ -1,7 +1,7 @@
 import Script from "next/script";
 
 const mobile = ({ onlineHash }) => {
-  console.log(onlineHash);
+  //console.log(onlineHash);
   return (
     <>
       <div className=" h-screen w-full" id="golden-race-mobile-app" />

@@ -1,7 +1,6 @@
 import Script from "next/script";
 
 const desktop = ({ onlineHash }) => {
-  console.log(onlineHash);
   return (
     <>
       <div className=" h-screen w-full" id="golden-race-desktop-app" />

@@ -31,8 +31,11 @@ export default function SignUp() {
       if (res.ok) {
         alert("User register success");
         router.push("/");
+      } else {
+        alert("User or email is already in use");
       }
     } catch (error) {
+      alert("User or email is already in use");
       console.log(error);
     }
   }

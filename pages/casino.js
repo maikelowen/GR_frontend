@@ -37,7 +37,7 @@ const casino = () => {
   };
 
   async function handleOnClickMob() {
-    router.push("/mobile");
+    router.push("/gr/mobile");
   }
 
   return (

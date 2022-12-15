@@ -1,9 +1,9 @@
 import Script from "next/script";
-import Mobile from "../public/scripts/grMobileScript";
+import MobileScript from "public/scripts/grMobileScript";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-const Test = () => {
+const Mobile = () => {
   const router = useRouter();
   const [state, setState] = useState({
     amount: 0,
@@ -32,10 +32,7 @@ const Test = () => {
     if (res.ok) {
       const json = await res.json();
       setProfile(json);
-      console.log(json.username);
-      //username = json.username;
       setUsername(json.username);
-      //console.log(profile.username);
       logUser(json.username);
     } else {
       router.push("/");
@@ -43,7 +40,6 @@ const Test = () => {
   }
 
   async function logUser(username) {
-    console.log(username);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/gr/get-url?entityName=${username}`,
       {
@@ -53,7 +49,6 @@ const Test = () => {
     if (res.ok) {
       const onlineHash = await res.text();
       setOnlineHash(onlineHash);
-      console.log(onlineHash);
       setLoaded(true);
     } else {
       alert("Wrong Credentials");
@@ -61,8 +56,6 @@ const Test = () => {
   }
 
   async function handleClick() {
-    console.log(state.amount);
-    console.log(profile.username);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/wallet/add-credit?credit=${state.amount}&username=${username}`,
       {
@@ -78,15 +71,15 @@ const Test = () => {
   function handleChange(e) {
     const copy = { ...state };
     copy[e.target.name] = e.target.value;
-    console.log(copy);
     setState(copy);
+    setAmount(state.amount);
   }
 
   return (
     <>
       {!showModal ? (
         onlineHash ? (
-          <Mobile onlineHash={onlineHash} />
+          <MobileScript onlineHash={onlineHash} />
         ) : (
           <div>Loading...</div>
         )
@@ -112,4 +105,4 @@ const Test = () => {
     </>
   );
 };
-export default Test;
+export default Mobile;

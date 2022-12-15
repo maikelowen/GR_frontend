@@ -32,10 +32,7 @@ const Desktop = () => {
     if (res.ok) {
       const json = await res.json();
       setProfile(json);
-      console.log(json.username);
-      //username = json.username;
       setUsername(json.username);
-      //console.log(profile.username);
       logUser(json.username);
     } else {
       router.push("/");
@@ -43,7 +40,6 @@ const Desktop = () => {
   }
 
   async function logUser(username) {
-    console.log(username);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/gr/get-url?entityName=${username}`,
       {
@@ -53,7 +49,6 @@ const Desktop = () => {
     if (res.ok) {
       const onlineHash = await res.text();
       setOnlineHash(onlineHash);
-      console.log(onlineHash);
       setLoaded(true);
     } else {
       alert("Wrong Credentials");
@@ -61,8 +56,6 @@ const Desktop = () => {
   }
 
   async function handleClick() {
-    console.log(state.amount);
-    console.log(profile.username);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/wallet/add-credit?credit=${state.amount}&username=${username}`,
       {
